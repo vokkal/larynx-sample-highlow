@@ -17,15 +17,25 @@ export const Frames: { [key: string]: AppFrame } = {
         implementation: require("./frames/EntryPoint"),
         targets: [this.Start]
     },
-    "EntryPoint_Help": {
-        name: "EntryPoint_Help",
-        implementation: require("./frames/EntryPoint_Help"),
-        targets: [this.Start]
+    "NumberGuess": {
+        name: "NumberGuess",
+        implementation: require("./frames/NumberGuess"),
+        targets: [this.NumberGuess]
     },
     "Start": {
         name: "Start",
         implementation: require("./frames/start"),
+        targets: [this.NumberGuess]
+    },
+    "GameFinished": {
+        name: "EndGame",
+        implementation: require("./frames/GameFinished"),
         targets: []
+    },
+    "Help": {
+        name: "Help",
+        implementation: require("./frames/Help"),
+        targets: [this.Start, this.EndGame, this.NumberGuess]
     }
 };
 

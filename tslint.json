@@ -57,7 +57,7 @@
     "no-null-keyword": true,
     "switch-default": true,
     "ordered-imports": [
-      true
+      false
     ]
   }
 }

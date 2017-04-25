@@ -5,6 +5,7 @@
   "main": "index.js",
   "devDependencies": {
     "@types/node": "^7.0.12",
+    "rollup": "^0.41.6",
     "tslint": "^4.5.1",
     "typescript": "^2.2.2"
   },
@@ -12,7 +13,8 @@
     "larynx-sdk": "^1.0.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tslint -c tslint.json 'src/**/*.ts' && rm -rf ./build && tsc -p . && cp -r ./src/templates ./build/src",
+    "pack": "npm run build && rm -rf ./dist && mkdir ./dist && pushd ./build/src && zip -r1q ../../dist/highlow.zip . && popd"
   },
   "author": "",
   "license": "SEE LICENSE IN License.txt"

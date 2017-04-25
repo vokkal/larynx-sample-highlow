@@ -6,16 +6,8 @@ import {AppContext} from "../index";
 
 export default class IndexFrame extends AppContext implements IFrame {
     transitions = {
-        actions: [
-            {
-                action: Actions.YesAction,
-                handler: Frames.Start
-            }
-        ],
         unhandled: {
-            handler: {
-                name: "EntryPoint_Unhandled"
-            }
+            handler: Frames.Start
         }
     };
     sessionEnded = function () {

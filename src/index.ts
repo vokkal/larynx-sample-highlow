@@ -1,22 +1,70 @@
 import {initialize, LarynxInstance} from "larynx-sdk";
-import {AlexaRequestBody, LambdaContext} from "larynx-sdk/dist/definitions/AlexaService";
-import {ISessionContext} from "larynx-sdk/dist/definitions/interfaces";
+import {
+    AlexaRequestBody, AlexaResponseBody, LambdaContext, Response
+} from "larynx-sdk/dist/definitions/AlexaService";
+import {Frames, ISessionContext} from "larynx-sdk/dist/definitions/interfaces";
 import {AlexaRequestAdapter} from "larynx-sdk/dist/platforms/alexa/Alexa";
+import {TemplateResponseModel} from "larynx-sdk/dist/platforms/common/common";
+import * as fs from "fs";
 
 export const Instance: LarynxInstance = initialize({});
 
 export class AppContext implements ISessionContext {
     attributes: any;
+    slots?: any;
+
     constructor(attributes: {}) {
         this.attributes = attributes;
     }
 }
 
-export function AlexaHandler(event: AlexaRequestBody, context: LambdaContext, callback: () => void) {
+export class TemplateModel extends TemplateResponseModel implements AppContext {
+    constructor(name: string, response?: any) {
+        super(name, "");
+        this.responseName = name;
+        this.response = response;
+    }
+
+    response: {
+        speech: {
+            text?: string,
+            ssml?: string
+        },
+        reprompt?: {
+            text?: string,
+            ssml?: string
+        },
+        card?: {
+            title: string,
+            text: string
+        }
+    };
+
+    attributes: any;
+    slots: any;
+}
+
+export function AlexaHandler(event: AlexaRequestBody, context: LambdaContext, callback: (response: any | undefined, err?: Error | undefined) => void) {
 
     let appContext = new AppContext(event.session.attributes);
     let RequestAdapter = new AlexaRequestAdapter(event, {name: "Entry"}, Instance.Actions);
 
+    appContext.slots = RequestAdapter.event.params;
+
+    Instance.HandleEvent(RequestAdapter, appContext).then((responseModel: TemplateModel) => {
+        let rendered: any = Instance.Render(fs.readFileSync("./templates/alexa/response.pug").toString(), responseModel);
+
+        let response = { // TODO: types for rendered response
+            version: "1.0",
+            response: rendered["response"],
+            attributes: responseModel.attributes
+        };
+        console.log("response:\n" + response);
+        callback(response, undefined);
+    }).catch((error: Error) => {
+        console.log("error: " + error);
+        callback(undefined, error);
+    });
 }
 
 

@@ -1,10 +1,10 @@
-import {LarynxInterfaces} from "larynx-sdk";
 import {Instance} from "./index";
+import {Actions as LarynxActions} from "larynx-sdk/dist/definitions/interfaces";
 
 /**
  * Extend the built in actions interface to include aliases
  */
-export declare interface AppAction extends LarynxInterfaces.Actions {
+export declare interface AppAction extends LarynxActions {
     name: string;
     aliases: Array<string>;
 }
@@ -37,8 +37,11 @@ export const Actions: { [key: string]: AppAction } = {
         name: "NumberGuessAction",
         aliases: ["NumberGuessIntent"]
         // "slots": [{"name": "number", "type": "AMAZON.NUMBER"}]
+    },
+    "LaunchAction": {
+        name: "LaunchAction",
+        aliases: ["LaunchRequest"]
     }
-
 };
 
 /**
@@ -50,7 +53,7 @@ for (let key in Actions) {
         if (Instance.Actions[alias]) {
             throw new Error(`Alias '${alias}' for action '${key}' is already defined!`);
         } else {
-            Instance.Actions[alias] = Actions[key];
+            Instance.Actions[alias] = {name: key};
         }
     }
 }
