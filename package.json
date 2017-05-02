@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "devDependencies": {
-    "@types/node": "^7.0.12",
+    "@types/node": "^7.0.15",
     "rollup": "^0.41.6",
     "tslint": "^4.5.1",
     "typescript": "^2.2.2"

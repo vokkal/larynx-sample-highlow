@@ -7,7 +7,6 @@ import * as fs from "fs";
 import {RegisterActions} from "./actionMap";
 import {RegisterFrames} from "./frameMap";
 import {AppContext, TemplateModel} from "./base";
-import {ActionResponseModel} from "larynx-sdk/dist/definitions/interfaces";
 
 export const Instance: LarynxInstance = initialize({});
 
@@ -15,7 +14,6 @@ RegisterActions();
 RegisterFrames();
 
 export function AlexaHandler(event: AlexaRequestBody, context: LambdaContext, callback: (response: any | undefined, err?: Error | undefined) => void) {
-
 
     let appContext = new AppContext(event.session.attributes);
 
