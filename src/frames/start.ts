@@ -1,10 +1,10 @@
 import {AlexaService, CommonClasses, LarynxClasses, LarynxInterfaces} from "larynx-sdk";
-import {AppContext, Instance, TemplateModel} from "../index";
 import {Actions, AppAction} from "../actionMap";
 import {AppFrame, Frames} from "../frameMap";
 import {RedirectResponse} from "larynx-sdk/dist/platforms/common/common";
+import {AppContext, TemplateModel} from "../base";
 
-export default class StartFrame extends AppContext implements LarynxInterfaces.IFrame {
+export default class Start extends AppContext implements LarynxInterfaces.IFrame {
     pre = function () {
         return new Promise(resolve => {
             // Starting a new game, set the guess target

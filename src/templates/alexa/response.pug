@@ -2,12 +2,12 @@ doctype xml
 response
     outputSpeech
         type SSML
-        SSML <![CDATA[ssml]]>
+        SSML <![CDATA[!{response.speech.ssml}]]>
     reprompt
         outputSpeech
             type SSML
-            SSML <![CDATA[!{ssml}]]>
+            SSML <![CDATA[!{response.reprompt.ssml}]]>
     card
         type Simple
-        title card.title
-        content card.text
+        title !{response.card.title}
+        content !{response.card.text}

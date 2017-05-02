@@ -1,7 +1,7 @@
 import {Actions, AppAction} from "../actionMap";
 import {AppFrame, Frames} from "../frameMap";
 import {IFrame} from "larynx-sdk/dist/definitions/interfaces";
-import {AppContext, TemplateModel} from "../index";
+import {AppContext, TemplateModel} from "../base";
 
 export default class GameFinished extends AppContext implements IFrame {
     prompts = function () {

@@ -1,10 +1,10 @@
 import {Actions, AppAction} from "../actionMap";
 import {AppFrame, Frames} from "../frameMap";
 import {IFrame} from "larynx-sdk/dist/definitions/interfaces";
-import {AppContext, TemplateModel} from "../index";
 import {RedirectResponse} from "larynx-sdk/dist/platforms/common/common";
+import {AppContext, TemplateModel} from "../base";
 
-export default class NumberGuessFrame extends AppContext implements IFrame {
+export default class NumberGuess extends AppContext implements IFrame {
     pre = function () {
         return new Promise(resolve => {
             let numSlot = this.slots.number;

@@ -47,13 +47,15 @@ export const Actions: { [key: string]: AppAction } = {
 /**
  * Register each alias for SDK usage
  */
-for (let key in Actions) {
-    for (let aliasIndex in Actions[key].aliases) {
-        let alias = Actions[key].aliases[aliasIndex];
-        if (Instance.Actions[alias]) {
-            throw new Error(`Alias '${alias}' for action '${key}' is already defined!`);
-        } else {
-            Instance.Actions[alias] = {name: key};
+export function RegisterActions() {
+    for (let key in Actions) {
+        for (let aliasIndex in Actions[key].aliases) {
+            let alias = Actions[key].aliases[aliasIndex];
+            if (Instance.Actions[alias]) {
+                throw new Error(`Alias '${alias}' for action '${key}' is already defined!`);
+            } else {
+                Instance.Actions[alias] = {name: key};
+            }
         }
     }
 }

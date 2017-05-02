@@ -15,6 +15,9 @@
   },
   "include": [
     "./src/index.ts",
+    "./src/actionMap.ts",
+    "./src/frameMap.ts",
+    "./src/frames/*/**.ts",
     "./src/*/**.ts"
   ],
   "exclude": [
