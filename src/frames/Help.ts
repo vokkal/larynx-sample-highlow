@@ -1,9 +1,9 @@
 import {Actions, AppAction} from "../actionMap";
 import {AppFrame, Frames} from "../frameMap";
 import {IFrame} from "larynx-sdk/dist/definitions/interfaces";
-import {AppContext, TemplateModel} from "../index";
+import {AppContext, TemplateModel} from "../base";
 
-export default class HelpFrame extends AppContext implements IFrame {
+export default class Help extends AppContext implements IFrame {
     prompts = function () {
         let response = {
             speech: {

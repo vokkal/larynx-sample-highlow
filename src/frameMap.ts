@@ -1,6 +1,11 @@
 import {CreatesFrame, Frames as LarynxFrames} from "larynx-sdk/dist/definitions/interfaces";
 import {EventContainer} from "larynx-sdk/dist/platforms/implementations";
 import {Instance} from "./index";
+import IndexFrame from "./frames/EntryPoint";
+import NumberGuess from "./frames/NumberGuess";
+import Start from "./frames/start";
+import GameFinished from "./frames/GameFinished";
+import Help from "./frames/Help";
 
 /**
  * Extend the built in frame interface to include implementation and targets
@@ -14,39 +19,42 @@ export declare interface AppFrame extends LarynxFrames {
 export const Frames: { [key: string]: AppFrame } = {
     "EntryPoint": {
         name: "EntryPoint",
-        implementation: require("./frames/EntryPoint"),
+        implementation: IndexFrame,
         targets: [this.Start]
     },
     "NumberGuess": {
         name: "NumberGuess",
-        implementation: require("./frames/NumberGuess"),
+        implementation: NumberGuess,
         targets: [this.NumberGuess]
     },
     "Start": {
         name: "Start",
-        implementation: require("./frames/start"),
+        implementation: Start,
         targets: [this.NumberGuess]
     },
     "GameFinished": {
         name: "EndGame",
-        implementation: require("./frames/GameFinished"),
+        implementation: GameFinished,
         targets: []
     },
     "Help": {
         name: "Help",
-        implementation: require("./frames/Help"),
-        targets: [this.Start, this.EndGame, this.NumberGuess]
+        implementation: Help,
+        targets: [this.Start, this.GameFinished, this.NumberGuess]
     }
 };
 
 /**
  * Create event containers for each frame
  */
-for (let frameKey in Frames) {
-    class T implements EventContainer {
-        frameId = {name: Frames[frameKey].name};
-        targets = Frames[frameKey].targets;
-        impl = Frames[frameKey].implementation;
+
+export function RegisterFrames() {
+    for (let frameKey in Frames) {
+        class T implements EventContainer {
+            frameId = {name: Frames[frameKey].name};
+            targets = Frames[frameKey].targets;
+            impl = Frames[frameKey].implementation;
+        }
+        Instance.Register(new T());
     }
-    Instance.Register(new T());
 }
