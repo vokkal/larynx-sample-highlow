@@ -17,6 +17,10 @@ export function AlexaHandler(event: AlexaRequestBody, context: LambdaContext, ca
 
     console.log("Request:\n" + JSON.stringify(event));
 
+    if (!event.session.attributes) {
+        event.session.attributes = {};
+    }
+
     let appContext = new AppContext(event.session.attributes);
 
     let RequestAdapter = new AlexaRequestAdapter(event, {name: "EntryPoint"}, Instance.Actions);
