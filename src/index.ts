@@ -22,7 +22,7 @@ export function AlexaHandler(event: AlexaRequestBody, context: LambdaContext, ca
     appContext.slots = RequestAdapter.event.params;
 
     Instance.HandleEvent(RequestAdapter, appContext).then((responseModel: TemplateModel) => {
-        console.log('response model: ' + JSON.stringify(responseModel, null, 4));
+        console.log("response model: " + JSON.stringify(responseModel, undefined, 4));
 
         let rendered: any = Instance.Render(fs.readFileSync(__dirname + "/templates/alexa/response.pug").toString(), responseModel);
 
@@ -31,7 +31,7 @@ export function AlexaHandler(event: AlexaRequestBody, context: LambdaContext, ca
             response: rendered["response"],
             attributes: responseModel.attributes
         };
-        console.log("response:\n" + JSON.stringify(response, null, 4));
+        console.log("response:\n" + JSON.stringify(response, undefined, 4));
         callback(response, undefined);
     }).catch((error: Error) => {
         console.log("error: " + error);

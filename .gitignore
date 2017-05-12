@@ -3,3 +3,4 @@ lib
 typings
 npm-debug.log
 dist
+src/**/*.js
