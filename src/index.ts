@@ -15,6 +15,8 @@ RegisterFrames();
 
 export function AlexaHandler(event: AlexaRequestBody, context: LambdaContext, callback: (err: Error | undefined, response: any | undefined) => void) {
 
+    console.log("Request:\n" + JSON.stringify(event));
+
     let appContext = new AppContext(event.session.attributes);
 
     let RequestAdapter = new AlexaRequestAdapter(event, {name: "EntryPoint"}, Instance.Actions);
