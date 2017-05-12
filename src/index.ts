@@ -13,7 +13,7 @@ export const Instance: LarynxInstance = initialize({});
 RegisterActions();
 RegisterFrames();
 
-export function AlexaHandler(event: AlexaRequestBody, context: LambdaContext, callback: (response: any | undefined, err?: Error | undefined) => void) {
+export function AlexaHandler(event: AlexaRequestBody, context: LambdaContext, callback: (err: Error | undefined, response: any | undefined) => void) {
 
     let appContext = new AppContext(event.session.attributes);
 
@@ -32,9 +32,9 @@ export function AlexaHandler(event: AlexaRequestBody, context: LambdaContext, ca
             attributes: responseModel.attributes
         };
         console.log("response:\n" + JSON.stringify(response, undefined, 4));
-        callback(response, undefined);
+        callback(undefined, response);
     }).catch((error: Error) => {
         console.log("error: " + error);
-       // callback(undefined, error);
+        callback(undefined, error);
     });
 }
