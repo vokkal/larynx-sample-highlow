@@ -35,8 +35,9 @@ export function AlexaHandler(event: AlexaRequestBody, context: LambdaContext, ca
         let response = { // TODO: types for rendered response
             version: "1.0",
             response: rendered["response"],
-            attributes: responseModel.attributes
+            sessionAttributes: responseModel.attributes
         };
+
         console.log("response:\n" + JSON.stringify(response, undefined, 4));
         callback(undefined, response);
     }).catch((error: Error) => {
