@@ -5,8 +5,16 @@ export class AppContext implements ISessionContext {
     attributes: any;
     slots?: any;
 
-    constructor(attributes: {}) {
-        this.attributes = attributes;
+    constructor(attributes: { ContextOptions: { attributes: {}, slots: {} } }) {
+        console.log("adding: " + JSON.stringify(attributes, undefined, 4));
+
+        if (attributes && attributes.ContextOptions && attributes.ContextOptions.attributes) {
+            this.attributes = Object.assign({}, attributes.ContextOptions.attributes);
+        }
+
+        if (attributes && attributes.ContextOptions && attributes.ContextOptions.slots) {
+            this.slots = Object.assign({}, attributes.ContextOptions.slots);
+        }
     }
 }
 

@@ -1,0 +1,35 @@
+{
+  "session": {
+    "sessionId": "SessionId.23886e12-ad12-43ed-815a-47e17005cf63",
+    "application": {
+      "applicationId": "amzn1.ask.skill.e43d8481-742d-4e8a-bb56-1d37c428ca38"
+    },
+    "attributes": {
+      "guessNumber": 35,
+      "ContextOptions": {
+        "attributes": {},
+        "slots": {}
+      }
+    },
+    "user": {
+      "userId": "amzn1.ask.account.AHECEACDHKZMCMZEZMXBOYWW4LLGFBMG4AB5VKDHWRIFJL7YKL2B5EM37OV6KZ4SG3KZTDGE3PO3QYAQOXKE6J4Q6KJVLPCFZFATIECNUMAGTD4F6CWDIW2FDKS224D7AHVSR6OADGG7LA63JUQ6VJTUCPCVKRE6FITXULDVMG5KPHD4QH6JYWFTDTNPVL4LDL66BJ7OEHABDLI"
+    },
+    "new": false
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "EdwRequestId.e9d097ac-6ea1-45af-b514-6987c8bf01a6",
+    "locale": "en-US",
+    "timestamp": "2017-05-13T02:15:13Z",
+    "intent": {
+      "name": "NumberGuessIntent",
+      "slots": {
+        "number": {
+          "name": "number",
+          "value": "50"
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
