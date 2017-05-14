@@ -32,6 +32,10 @@ export function AlexaHandler(event: AlexaRequestBody, context: LambdaContext, ca
 
         let rendered: any = Instance.Render(fs.readFileSync(__dirname + "/templates/alexa/response.pug").toString(), responseModel);
 
+        responseModel.attributes["currentFrame"] = responseModel.responseFrame;
+        responseModel.attributes["currentFrameIndex"] = responseModel.responseFrameIndex;
+        responseModel.attributes["waitingForTransition"] = !responseModel.endsSession;
+
         let response = { // TODO: types for rendered response
             version: "1.0",
             response: rendered["response"],
